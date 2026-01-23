@@ -1,0 +1,276 @@
+/* ═══════════════════════════════════════════════════════════════
+   BARBIE CONTROLS - Bubbly playback buttons
+   ═══════════════════════════════════════════════════════════════ */
+
+.controls {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+  position: relative;
+}
+
+/* Decorative line behind buttons */
+.controls::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  right: -10px;
+  height: 4px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--barbie-yellow) 20%,
+    var(--barbie-yellow-bright) 50%,
+    var(--barbie-yellow) 80%,
+    transparent 100%);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE BUTTON STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+.control-btn {
+  width: 75px;
+  height: 55px;
+  background: linear-gradient(180deg,
+    var(--barbie-green-light) 0%,
+    var(--barbie-green) 50%,
+    var(--barbie-green-dark) 100%);
+  border: 4px solid var(--barbie-white);
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 6px 0 var(--barbie-green-dark),
+    0 8px 20px rgba(60, 179, 113, 0.4),
+    inset 0 3px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+/* Glossy shine overlay */
+.control-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 100%);
+  border-radius: 12px 12px 50% 50%;
+  pointer-events: none;
+}
+
+/* Decorative star */
+.control-btn::after {
+  content: '✦';
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  font-size: 10px;
+  color: var(--barbie-yellow);
+  opacity: 0.8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HOVER & ACTIVE STATES
+   ═══════════════════════════════════════════════════════════════ */
+
+.control-btn:hover {
+  background: linear-gradient(180deg,
+    #a8ffdb 0%,
+    var(--barbie-green-light) 50%,
+    var(--barbie-green) 100%);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 0 var(--barbie-green-dark),
+    0 12px 25px rgba(60, 179, 113, 0.5),
+    0 0 20px rgba(127, 255, 212, 0.4),
+    inset 0 3px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:active {
+  transform: translateY(4px);
+  box-shadow:
+    0 2px 0 var(--barbie-green-dark),
+    0 4px 10px rgba(60, 179, 113, 0.3),
+    inset 0 3px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PLAY BUTTON - Special styling
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-play {
+  width: 85px;
+  height: 62px;
+  background: linear-gradient(180deg,
+    var(--barbie-fucsia-light) 0%,
+    var(--barbie-fucsia) 50%,
+    var(--barbie-fucsia-dark) 100%);
+  border: 4px solid var(--barbie-white);
+  border-radius: 20px;
+  box-shadow:
+    0 6px 0 var(--barbie-fucsia-dark),
+    0 8px 20px rgba(199, 21, 133, 0.4),
+    inset 0 3px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-play::after {
+  content: '♥';
+  font-size: 12px;
+  color: var(--barbie-yellow);
+}
+
+.btn-play:hover {
+  background: linear-gradient(180deg,
+    #ff8dc7 0%,
+    var(--barbie-fucsia-light) 50%,
+    var(--barbie-fucsia) 100%);
+  box-shadow:
+    0 8px 0 var(--barbie-fucsia-dark),
+    0 12px 25px rgba(199, 21, 133, 0.5),
+    0 0 25px rgba(255, 105, 180, 0.5),
+    inset 0 3px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn-play:active {
+  box-shadow:
+    0 2px 0 var(--barbie-fucsia-dark),
+    0 4px 10px rgba(199, 21, 133, 0.3),
+    inset 0 3px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PLAYING STATE - Button transformation
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-play.playing {
+  background: linear-gradient(180deg,
+    var(--barbie-yellow) 0%,
+    var(--barbie-yellow-bright) 50%,
+    var(--barbie-yellow-dark) 100%);
+  border-color: var(--barbie-fucsia);
+  box-shadow:
+    0 6px 0 #d4c700,
+    0 8px 20px rgba(255, 244, 79, 0.4),
+    0 0 30px rgba(255, 244, 79, 0.3),
+    inset 0 3px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  animation: playingPulse 1.5s ease-in-out infinite;
+}
+
+.btn-play.playing::after {
+  color: var(--barbie-fucsia);
+  animation: heartBeat 1s ease-in-out infinite;
+}
+
+@keyframes playingPulse {
+  0%, 100% {
+    box-shadow:
+      0 6px 0 #d4c700,
+      0 8px 20px rgba(255, 244, 79, 0.4),
+      0 0 30px rgba(255, 244, 79, 0.3),
+      inset 0 3px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 6px 0 #d4c700,
+      0 8px 25px rgba(255, 244, 79, 0.6),
+      0 0 50px rgba(255, 244, 79, 0.5),
+      0 0 80px rgba(255, 105, 180, 0.2),
+      inset 0 3px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -2px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.2); }
+}
+
+.btn-play.playing:hover {
+  background: linear-gradient(180deg,
+    #fffde7 0%,
+    var(--barbie-yellow) 50%,
+    var(--barbie-yellow-bright) 100%);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BUTTON ICONS
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-icon {
+  font-size: 22px;
+  color: var(--barbie-white);
+  text-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.2),
+    0 0 10px rgba(255, 255, 255, 0.3);
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease;
+}
+
+.control-btn:hover .btn-icon {
+  transform: scale(1.1);
+}
+
+.btn-play .btn-icon {
+  font-size: 26px;
+  color: var(--barbie-white);
+}
+
+.btn-play.playing .btn-icon {
+  color: var(--barbie-fucsia);
+  text-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.1),
+    0 0 15px rgba(255, 20, 147, 0.4);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   REWIND & FORWARD - Specific styling
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-rewind,
+.btn-forward {
+  position: relative;
+}
+
+.btn-rewind:hover .btn-icon,
+.btn-forward:hover .btn-icon {
+  animation: bounceHorizontal 0.4s ease-in-out;
+}
+
+@keyframes bounceHorizontal {
+  0%, 100% { transform: translateX(0) scale(1.1); }
+  50% { transform: translateX(-3px) scale(1.1); }
+}
+
+.btn-forward:hover .btn-icon {
+  animation-name: bounceHorizontalRight;
+}
+
+@keyframes bounceHorizontalRight {
+  0%, 100% { transform: translateX(0) scale(1.1); }
+  50% { transform: translateX(3px) scale(1.1); }
+}

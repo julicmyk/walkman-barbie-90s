@@ -1,0 +1,45 @@
+.display {
+  width: 420px;
+  padding: 0;
+}
+
+.display-screen {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px 25px;
+  border: 4px solid #4AB8B8;
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.display-track-number {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  color: #5AC8C8;
+  margin-bottom: 5px;
+  opacity: 0.9;
+  text-align: center;
+}
+
+.display-text-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.display-text {
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  font-size: 20px;
+  color: #ff69b4;
+  animation: marquee 8s linear infinite;
+  padding-right: 50px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

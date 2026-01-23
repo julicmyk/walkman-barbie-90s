@@ -1,0 +1,405 @@
+/* ═══════════════════════════════════════════════════════════════
+   BARBIE POP 90s WALKMAN - Dream Music Player
+   Aesthetic: Plastic fantastic, bubbly, playful, maximalist 90s
+   Colors: Fucsia, Verde Menta, Amarillo Pastel
+   ═══════════════════════════════════════════════════════════════ */
+
+/* CSS Variables */
+:root {
+  --barbie-fucsia: #ff1493;
+  --barbie-fucsia-light: #ff69b4;
+  --barbie-fucsia-dark: #c71585;
+  --barbie-green: #7fffd4;
+  --barbie-green-light: #98ffca;
+  --barbie-green-dark: #3cb371;
+  --barbie-yellow: #fffacd;
+  --barbie-yellow-bright: #fff44f;
+  --barbie-yellow-dark: #f0e68c;
+  --barbie-white: #fff;
+  --barbie-pink-soft: #ffb6d9;
+}
+
+/* Background Container */
+.walkman {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(255, 105, 180, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(127, 255, 212, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(255, 250, 205, 0.6) 0%, transparent 70%),
+    linear-gradient(135deg, #ffb6d9 0%, #fffacd 25%, #98ffca 50%, #ffb6d9 75%, #fffacd 100%);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 0% 50%; }
+  25% { background-position: 100% 0%, 0% 100%, 50% 50%, 50% 100%; }
+  50% { background-position: 100% 100%, 0% 0%, 50% 50%, 100% 50%; }
+  75% { background-position: 0% 100%, 100% 0%, 50% 50%, 50% 0%; }
+}
+
+/* Floating decorative elements */
+.walkman::before,
+.walkman::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.walkman::before {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, var(--barbie-fucsia-light) 0%, transparent 70%);
+  top: -100px;
+  left: -100px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.walkman::after {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--barbie-green) 0%, transparent 70%);
+  bottom: -80px;
+  right: -80px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.1); }
+}
+
+/* Main Body Container */
+.walkman-body {
+  width: 100%;
+  height: 100vh;
+  padding: 30px 50px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DECORATIVE ELEMENTS - Hearts, Stars, Flowers
+   ═══════════════════════════════════════════════════════════════ */
+
+.star {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Hearts */
+.star-1 {
+  top: 8%;
+  left: 8%;
+  font-size: 50px;
+  color: var(--barbie-fucsia);
+  animation-delay: 0s;
+}
+.star-1::before { content: '♥'; }
+
+.star-2 {
+  top: 12%;
+  right: 12%;
+  font-size: 35px;
+  color: var(--barbie-green);
+  animation-delay: 0.5s;
+}
+.star-2::before { content: '♥'; }
+
+/* Stars */
+.star-3 {
+  bottom: 15%;
+  left: 10%;
+  font-size: 40px;
+  color: var(--barbie-yellow-bright);
+  animation-delay: 1s;
+}
+.star-3::before { content: '✦'; }
+
+.star-4 {
+  bottom: 10%;
+  right: 8%;
+  font-size: 55px;
+  color: var(--barbie-fucsia-light);
+  animation-delay: 1.5s;
+}
+.star-4::before { content: '✦'; }
+
+/* Flowers */
+.star-5 {
+  top: 40%;
+  left: 5%;
+  font-size: 45px;
+  color: var(--barbie-green-light);
+  animation-delay: 2s;
+}
+.star-5::before { content: '✿'; }
+
+.star-6 {
+  top: 20%;
+  left: 20%;
+  font-size: 30px;
+  color: var(--barbie-yellow-bright);
+  animation-delay: 0.3s;
+}
+.star-6::before { content: '❀'; }
+
+.star-7 {
+  bottom: 35%;
+  left: 3%;
+  font-size: 25px;
+  color: var(--barbie-fucsia);
+  animation-delay: 1.2s;
+}
+.star-7::before { content: '♥'; }
+
+.star-8 {
+  top: 30%;
+  right: 5%;
+  font-size: 38px;
+  color: var(--barbie-green);
+  animation-delay: 0.8s;
+}
+.star-8::before { content: '✿'; }
+
+.star-9 {
+  bottom: 28%;
+  right: 6%;
+  font-size: 32px;
+  color: var(--barbie-yellow-bright);
+  animation-delay: 1.8s;
+}
+.star-9::before { content: '❀'; }
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(10deg);
+  }
+}
+
+.walkman-body > *:not(.star) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WALKMAN DEVICE - Main plastic body
+   ═══════════════════════════════════════════════════════════════ */
+
+.walkman-device {
+  background: linear-gradient(180deg,
+    var(--barbie-fucsia-light) 0%,
+    var(--barbie-fucsia) 40%,
+    var(--barbie-fucsia-dark) 100%);
+  border-radius: 35px;
+  padding: 35px 45px;
+  position: relative;
+  box-shadow:
+    0 0 0 6px var(--barbie-fucsia-dark),
+    0 0 0 10px var(--barbie-white),
+    0 0 0 14px var(--barbie-green),
+    0 20px 60px rgba(199, 21, 133, 0.4),
+    inset 0 4px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+/* Glossy shine effect */
+.walkman-device::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  right: 65%;
+  height: 25px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.6) 0%,
+    rgba(255,255,255,0.2) 50%,
+    rgba(255,255,255,0) 100%);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+/* Decorative corner flower */
+.walkman-device::after {
+  content: '✿';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 40px;
+  color: var(--barbie-yellow-bright);
+  text-shadow:
+    0 2px 4px rgba(0,0,0,0.2),
+    0 0 20px rgba(255, 244, 79, 0.5);
+  animation: spinSlow 8s linear infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Top edge bump */
+.walkman-top-edge {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 20px;
+  background: linear-gradient(180deg,
+    var(--barbie-fucsia-light) 0%,
+    var(--barbie-fucsia) 100%);
+  border-radius: 12px 12px 0 0;
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.4),
+    0 0 0 4px var(--barbie-fucsia-dark),
+    0 0 0 8px var(--barbie-white);
+}
+
+/* Small decorative circles on top edge */
+.walkman-top-edge::before,
+.walkman-top-edge::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--barbie-yellow);
+  border-radius: 50%;
+  top: 5px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.walkman-top-edge::before { left: 20px; }
+.walkman-top-edge::after { right: 20px; }
+
+/* Bottom edge bump */
+.walkman-bottom-edge {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 16px;
+  background: linear-gradient(180deg,
+    var(--barbie-fucsia) 0%,
+    var(--barbie-fucsia-dark) 100%);
+  border-radius: 0 0 10px 10px;
+  box-shadow:
+    inset 0 -2px 0 rgba(255, 255, 255, 0.2),
+    0 0 0 4px var(--barbie-fucsia-dark),
+    0 0 0 8px var(--barbie-white),
+    0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Speaker grille on bottom */
+.walkman-bottom-edge::before {
+  content: '• • • • •';
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: var(--barbie-fucsia-dark);
+  font-size: 8px;
+  letter-spacing: 4px;
+  top: 3px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WALKMAN CONTENT - Inner layout
+   ═══════════════════════════════════════════════════════════════ */
+
+.walkman-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Brand name */
+.walkman-brand {
+  font-family: 'Bungee', cursive;
+  font-size: 32px;
+  font-weight: normal;
+  color: var(--barbie-yellow);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow:
+    3px 3px 0 var(--barbie-green),
+    -1px -1px 0 var(--barbie-fucsia-dark),
+    0 0 30px rgba(255, 250, 205, 0.5);
+  position: relative;
+}
+
+/* Decorative underline */
+.walkman-brand::after {
+  content: '♥ ✦ ♥';
+  display: block;
+  font-family: sans-serif;
+  font-size: 14px;
+  letter-spacing: 8px;
+  text-align: center;
+  margin-top: 5px;
+  color: var(--barbie-green-light);
+  text-shadow: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CASSETTE WINDOW - Display area
+   ═══════════════════════════════════════════════════════════════ */
+
+.walkman-window {
+  background: linear-gradient(180deg,
+    var(--barbie-green-light) 0%,
+    var(--barbie-green) 50%,
+    var(--barbie-green-dark) 100%);
+  border-radius: 20px;
+  padding: 22px;
+  border: 5px solid var(--barbie-white);
+  box-shadow:
+    inset 0 8px 20px rgba(0, 0, 0, 0.15),
+    inset 0 -4px 10px rgba(255, 255, 255, 0.3),
+    0 8px 20px rgba(60, 179, 113, 0.4);
+  position: relative;
+}
+
+/* Corner decorations */
+.walkman-window::before,
+.walkman-window::after {
+  content: '♥';
+  position: absolute;
+  font-size: 16px;
+  color: var(--barbie-fucsia);
+}
+
+.walkman-window::before {
+  top: 5px;
+  left: 8px;
+}
+
+.walkman-window::after {
+  bottom: 5px;
+  right: 8px;
+}
