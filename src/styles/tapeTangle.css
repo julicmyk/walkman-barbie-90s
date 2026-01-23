@@ -1,0 +1,379 @@
+/* ═══════════════════════════════════════════════════════════════
+   TAPE TANGLE MINIGAME - Desenredar la cinta!
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Overlay oscuro */
+.tangle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(199, 21, 133, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: overlayFadeIn 0.4s ease-out;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal principal */
+.tangle-modal {
+  background: linear-gradient(180deg,
+    var(--barbie-yellow) 0%,
+    var(--barbie-yellow-dark) 100%);
+  border-radius: 30px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow:
+    0 0 0 6px var(--barbie-white),
+    0 0 0 12px var(--barbie-fucsia),
+    0 0 0 16px var(--barbie-green),
+    0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: modalBounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes modalBounceIn {
+  0% {
+    transform: scale(0.3) rotate(-10deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Efecto de brillo */
+.tangle-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0) 100%);
+  border-radius: 30px 30px 0 0;
+  pointer-events: none;
+}
+
+/* Header */
+.tangle-header {
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.tangle-icon {
+  font-size: 48px;
+  display: block;
+  animation: tapeShake 0.5s ease-in-out infinite;
+}
+
+@keyframes tapeShake {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.tangle-title {
+  font-family: 'Bungee', cursive;
+  font-size: 24px;
+  color: var(--barbie-fucsia);
+  margin: 10px 0 5px;
+  text-shadow:
+    2px 2px 0 var(--barbie-white),
+    -1px -1px 0 var(--barbie-fucsia-dark);
+}
+
+.tangle-subtitle {
+  font-family: 'Pacifico', cursive;
+  font-size: 16px;
+  color: var(--barbie-fucsia-dark);
+  margin: 0;
+}
+
+/* Área del juego */
+.tangle-game-area {
+  background: linear-gradient(180deg,
+    var(--barbie-green-light) 0%,
+    var(--barbie-green) 100%);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+  border: 4px solid var(--barbie-white);
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.15),
+    0 4px 10px rgba(60, 179, 113, 0.3);
+}
+
+/* Cassette enredado */
+.tangled-cassette {
+  position: relative;
+  height: 150px;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 100%);
+  border-radius: 15px;
+  margin-bottom: 15px;
+  border: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Carretes */
+.tangled-spool {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--barbie-white);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 3px solid var(--barbie-fucsia);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.2),
+    0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.tangled-spool-left {
+  left: 15%;
+  animation: spoolWobble 0.8s ease-in-out infinite;
+}
+
+.tangled-spool-right {
+  right: 15%;
+  animation: spoolWobble 0.8s ease-in-out infinite reverse;
+}
+
+@keyframes spoolWobble {
+  0%, 100% { transform: translateY(-50%) rotate(0deg); }
+  25% { transform: translateY(-50%) rotate(-15deg); }
+  75% { transform: translateY(-50%) rotate(15deg); }
+}
+
+.spool-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  background: var(--barbie-fucsia);
+  border-radius: 50%;
+}
+
+/* SVG de la cinta enredada */
+.tape-mess {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.tape-path-tangled {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 0;
+  transition: opacity 0.5s ease;
+}
+
+.tape-path-tangled.untangled {
+  opacity: 0;
+}
+
+.tape-path-clean {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.tape-path-clean.visible {
+  opacity: 1;
+}
+
+/* Nudos clickeables */
+.knot {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 10;
+}
+
+.knot:not(.untangled):hover {
+  transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+.knot:not(.untangled):active {
+  transform: translate(-50%, -50%) scale(0.9) !important;
+}
+
+.knot-icon {
+  font-size: 32px;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: knotPulse 1s ease-in-out infinite;
+}
+
+.knot:not(.untangled) .knot-icon {
+  animation: knotPulse 1s ease-in-out infinite;
+}
+
+@keyframes knotPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.knot.untangled {
+  pointer-events: none;
+  animation: knotPop 0.4s ease-out forwards;
+}
+
+@keyframes knotPop {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(360deg);
+  }
+}
+
+/* Barra de progreso */
+.tangle-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--barbie-white);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg,
+    var(--barbie-fucsia-light) 0%,
+    var(--barbie-fucsia) 100%);
+  border-radius: 8px;
+  transition: width 0.3s ease-out;
+  box-shadow: 0 0 10px var(--barbie-fucsia);
+}
+
+.progress-text {
+  font-family: 'Bungee', cursive;
+  font-size: 14px;
+  color: var(--barbie-fucsia-dark);
+  white-space: nowrap;
+}
+
+/* Mensaje de éxito */
+.success-message {
+  text-align: center;
+  padding: 15px;
+  animation: successPop 0.5s ease-out;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-text {
+  font-family: 'Bungee', cursive;
+  font-size: 28px;
+  color: var(--barbie-fucsia);
+  text-shadow:
+    2px 2px 0 var(--barbie-white),
+    4px 4px 0 var(--barbie-green);
+  margin: 0 10px;
+}
+
+.success-stars {
+  font-size: 24px;
+  animation: starSpin 1s linear infinite;
+}
+
+@keyframes starSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Hint */
+.tangle-hint {
+  text-align: center;
+  font-family: 'Pacifico', cursive;
+  font-size: 13px;
+  color: var(--barbie-fucsia-dark);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .tangle-modal {
+    padding: 20px;
+    margin: 15px;
+  }
+
+  .tangle-title {
+    font-size: 20px;
+  }
+
+  .tangle-icon {
+    font-size: 36px;
+  }
+
+  .knot {
+    width: 40px;
+    height: 40px;
+  }
+
+  .knot-icon {
+    font-size: 26px;
+  }
+}

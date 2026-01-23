@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import { Cassette } from './Cassette';
 import { Controls } from './Controls';
+import { TapeTangle } from './TapeTangle';
 import { useAudioPlayer } from '../hooks/useAudioPlayer';
+import { useInactivityDetector } from '../hooks/useInactivityDetector';
 import '../styles/walkman.css';
 
 export function Walkman({ playlist }) {
@@ -9,10 +12,25 @@ export function Walkman({ playlist }) {
     togglePlay,
     rewind,
     fastForward,
+    pause,
   } = useAudioPlayer(playlist);
+
+  const { isTangled, untangle } = useInactivityDetector();
+
+  // Pausar la música cuando se enreda la cinta
+  useEffect(() => {
+    if (isTangled && isPlaying) {
+      pause();
+    }
+  }, [isTangled, isPlaying, pause]);
+
+  const handleUntangle = () => {
+    untangle();
+  };
 
   return (
     <div className="walkman">
+      {isTangled && <TapeTangle onUntangle={handleUntangle} />}
       <div className="walkman-body">
         <div className="star star-1"></div>
         <div className="star star-2"></div>
