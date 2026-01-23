@@ -23,8 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Audio files (too large for git)
-public/music/*.mp3
 
 # Reference images
 referencias/
