@@ -47,7 +47,7 @@ export function TapeTangle({ onUntangle }) {
     <div className="tangle-overlay">
       <div className="tangle-modal">
         <div className="tangle-header">
-          <span className="tangle-icon">📼</span>
+          <img src="/emoji.png" alt="Cassette" className="tangle-icon-img" />
           <h2 className="tangle-title">Se enredó la cinta!</h2>
           <p className="tangle-subtitle">
             Tocá los nudos para desenredarla
@@ -101,7 +101,7 @@ export function TapeTangle({ onUntangle }) {
                 disabled={knot.untangled}
                 aria-label={`Nudo ${knot.id + 1}`}
               >
-                <span className="knot-icon">🎀</span>
+                <img src="/juli.png" alt="Juli" className="knot-image" />
               </button>
             ))}
           </div>

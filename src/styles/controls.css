@@ -274,3 +274,61 @@
   0%, 100% { transform: translateX(0) scale(1.1); }
   50% { transform: translateX(3px) scale(1.1); }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE - Mobile Portrait (9:16)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .controls {
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .controls::before {
+    height: 3px;
+    left: -5px;
+    right: -5px;
+  }
+
+  .control-btn {
+    width: 48px;
+    height: 36px;
+    border-radius: 10px;
+    border-width: 3px;
+    box-shadow:
+      0 4px 0 var(--barbie-green-dark),
+      0 5px 12px rgba(60, 179, 113, 0.4),
+      inset 0 2px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-play {
+    width: 56px;
+    height: 42px;
+    border-radius: 12px;
+    box-shadow:
+      0 4px 0 var(--barbie-fucsia-dark),
+      0 5px 12px rgba(199, 21, 133, 0.4),
+      inset 0 2px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-icon {
+    font-size: 14px;
+  }
+
+  .btn-play .btn-icon {
+    font-size: 18px;
+  }
+
+  .control-btn::after {
+    font-size: 6px;
+    top: 1px;
+    right: 2px;
+  }
+
+  .btn-play::after {
+    font-size: 8px;
+  }
+}

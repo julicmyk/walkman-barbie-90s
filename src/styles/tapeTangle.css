@@ -89,6 +89,15 @@
   animation: tapeShake 0.5s ease-in-out infinite;
 }
 
+.tangle-icon-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  animation: tapeShake 0.5s ease-in-out infinite;
+}
+
 @keyframes tapeShake {
   0%, 100% { transform: rotate(-5deg); }
   50% { transform: rotate(5deg); }
@@ -211,8 +220,8 @@
 /* Nudos clickeables */
 .knot {
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 55px;
+  height: 55px;
   background: none;
   border: none;
   cursor: pointer;
@@ -233,6 +242,23 @@
   font-size: 32px;
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  animation: knotPulse 1s ease-in-out infinite;
+}
+
+.knot-image {
+  position: absolute;
+  z-index: 3;
+  width: 28px;
+  height: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--barbie-fucsia);
+  box-shadow:
+    0 0 8px rgba(255, 20, 147, 0.5),
+    0 3px 6px rgba(0, 0, 0, 0.3);
   animation: knotPulse 1s ease-in-out infinite;
 }
 
@@ -368,12 +394,22 @@
     font-size: 36px;
   }
 
+  .tangle-icon-img {
+    width: 28px;
+    height: 28px;
+  }
+
   .knot {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
   }
 
   .knot-icon {
     font-size: 26px;
+  }
+
+  .knot-image {
+    width: 24px;
+    height: 24px;
   }
 }

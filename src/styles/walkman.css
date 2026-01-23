@@ -403,3 +403,96 @@
   bottom: 5px;
   right: 8px;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE - Mobile Portrait (9:16)
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 480px) {
+  .walkman-body {
+    padding: 15px 10px;
+  }
+
+  .walkman-device {
+    padding: 18px 15px;
+    border-radius: 20px;
+    box-shadow:
+      0 0 0 4px var(--barbie-fucsia-dark),
+      0 0 0 7px var(--barbie-white),
+      0 0 0 10px var(--barbie-green),
+      0 12px 40px rgba(199, 21, 133, 0.4),
+      inset 0 3px 0 rgba(255, 255, 255, 0.4),
+      inset 0 -3px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .walkman-content {
+    gap: 14px;
+  }
+
+  .walkman-brand {
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .walkman-brand::after {
+    font-size: 10px;
+    letter-spacing: 4px;
+    margin-top: 3px;
+  }
+
+  .walkman-window {
+    padding: 12px;
+    border-radius: 12px;
+    border-width: 3px;
+  }
+
+  .walkman-top-edge {
+    width: 70px;
+    height: 12px;
+    top: -10px;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .walkman-top-edge::before,
+  .walkman-top-edge::after {
+    width: 6px;
+    height: 6px;
+    top: 3px;
+  }
+
+  .walkman-top-edge::before { left: 12px; }
+  .walkman-top-edge::after { right: 12px; }
+
+  .walkman-bottom-edge {
+    width: 120px;
+    height: 10px;
+    bottom: -8px;
+  }
+
+  .walkman-bottom-edge::before {
+    font-size: 6px;
+    letter-spacing: 2px;
+    top: 2px;
+  }
+
+  .walkman-device::after {
+    font-size: 24px;
+    top: -5px;
+    right: -5px;
+  }
+
+  /* Adjust decorative elements */
+  .star {
+    font-size: 60% !important;
+  }
+
+  .walkman::before {
+    width: 100px;
+    height: 100px;
+  }
+
+  .walkman::after {
+    width: 80px;
+    height: 80px;
+  }
+}
