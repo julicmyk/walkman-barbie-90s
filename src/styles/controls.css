@@ -256,6 +256,31 @@
   position: relative;
 }
 
+/* Active/pressed-in state for rewind & forward */
+.btn-rewind.active,
+.btn-forward.active {
+  transform: translateY(4px);
+  background: linear-gradient(180deg,
+    var(--barbie-green-dark) 0%,
+    var(--barbie-green) 50%,
+    var(--barbie-green-light) 100%);
+  box-shadow:
+    0 2px 0 var(--barbie-green-dark),
+    0 2px 8px rgba(60, 179, 113, 0.3),
+    inset 0 3px 6px rgba(0, 0, 0, 0.2),
+    inset 0 -2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-rewind.active .btn-icon,
+.btn-forward.active .btn-icon {
+  animation: seekPulse 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes seekPulse {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0.7; transform: scale(0.9); }
+}
+
 .btn-rewind:hover .btn-icon,
 .btn-forward:hover .btn-icon {
   animation: bounceHorizontal 0.4s ease-in-out;

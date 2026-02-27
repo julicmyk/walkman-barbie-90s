@@ -275,6 +275,25 @@
   animation-duration: 1.8s;
 }
 
+/* Fast spinning for rewind/fast-forward */
+.spool.fast-spinning {
+  animation: spinFast 0.3s linear infinite;
+}
+
+.spool.fast-spinning.reverse {
+  animation: spinFastReverse 0.3s linear infinite;
+}
+
+@keyframes spinFast {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinFastReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
 @keyframes spinWithPulse {
   0% {
     transform: rotate(0deg);

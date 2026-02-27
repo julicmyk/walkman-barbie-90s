@@ -9,6 +9,7 @@ import '../styles/walkman.css';
 export function Walkman({ playlist }) {
   const {
     isPlaying,
+    mode,
     togglePlay,
     rewind,
     fastForward,
@@ -48,11 +49,12 @@ export function Walkman({ playlist }) {
             <div className="walkman-brand">Música de Julieta</div>
 
             <div className="walkman-window">
-              <Cassette isPlaying={isPlaying} />
+              <Cassette isPlaying={isPlaying} mode={mode} />
             </div>
 
             <Controls
               isPlaying={isPlaying}
+              mode={mode}
               onTogglePlay={togglePlay}
               onRewind={rewind}
               onFastForward={fastForward}

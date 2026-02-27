@@ -1,31 +1,35 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-// Tiempo de inactividad antes de que la cinta se enrede (en ms)
-const INACTIVITY_TIMEOUT = 30000; // 30 segundos para testing (cambiar a más tiempo en producción)
+// Tiempos de enredo: primero forzado a 5s, luego 10s inactivo, luego 40s inactivo
+const TIMEOUTS = [5000, 10000, 40000];
 
 export function useInactivityDetector() {
   const [isTangled, setIsTangled] = useState(false);
   const timeoutRef = useRef(null);
-  const lastActivityRef = useRef(Date.now());
+  const tangleCountRef = useRef(0); // cuántas veces se enredó
+
+  const getTimeout = () => {
+    const index = Math.min(tangleCountRef.current, TIMEOUTS.length - 1);
+    return TIMEOUTS[index];
+  };
+
+  const isFirstTangle = () => tangleCountRef.current === 0;
 
   const resetTimer = useCallback(() => {
-    lastActivityRef.current = Date.now();
-
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
-    // Solo iniciar el timer si no está enredado
     if (!isTangled) {
       timeoutRef.current = setTimeout(() => {
         setIsTangled(true);
-      }, INACTIVITY_TIMEOUT);
+      }, getTimeout());
     }
   }, [isTangled]);
 
   const untangle = useCallback(() => {
+    tangleCountRef.current += 1;
     setIsTangled(false);
-    // Reiniciar el timer después de desenredar
     setTimeout(() => {
       resetTimer();
     }, 100);
@@ -36,7 +40,8 @@ export function useInactivityDetector() {
     const events = ['mousedown', 'mousemove', 'keydown', 'touchstart', 'click'];
 
     const handleActivity = () => {
-      if (!isTangled) {
+      // El primer enredo es forzado (no se resetea con actividad)
+      if (!isTangled && !isFirstTangle()) {
         resetTimer();
       }
     };
