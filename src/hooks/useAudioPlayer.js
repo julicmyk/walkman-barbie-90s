@@ -40,7 +40,7 @@ export function useAudioPlayer(playlist) {
 
   const startTapeSound = useCallback(() => {
     if (!tapeSoundRef.current) {
-      const audio = new Audio('/music/tape-rewind.m4a');
+      const audio = new Audio(`${import.meta.env.BASE_URL}music/tape-rewind.m4a`);
       audio.addEventListener('timeupdate', () => {
         if (audio.currentTime >= TAPE_END) {
           audio.currentTime = TAPE_START;
